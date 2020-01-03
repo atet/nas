@@ -2,7 +2,7 @@
 
 [![.img/logo_nextcloud.png](.img/logo_nextcloud.png)](#nolink)
 
-# Introduction to Network Attached Storage (INCOMPLETE)
+# Introduction to Network Attached Storage
 
 **Estimated time to completion: 15 minutes**<br>(excluding waiting times for downloads and updates)
 
@@ -117,7 +117,8 @@ $ sudo apt-get -y install mariadb-server-10.3 && \
 [![.img/step03a.png](.img/step03a.png)](#nolink)
 
 * Create a new database for Nextcloud in MariaDB
-   * Enter the password you made earlier
+* Enter the password you made earlier
+* Once you execute "`sudo mysql -u root -p`", you will start the terminal for MariaDB, enter each line after "`>`" one at a time until you exit MariaDB:
 
 ```
 $ sudo mysql -u root -p
@@ -165,6 +166,8 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 
 [![.img/step03b.png](.img/step03b.png)](#nolink)
 
+**You are now done with accessing the Pi through command line, the remaining steps will be on your local computer**
+
 [Back to Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------
@@ -172,7 +175,7 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 ## 4. Nextcloud Server Setup
 
 * In your web browser, navigate to "`http://<PI'S IP ADDRESS>/nextcloud`"
-* Choose a username and password for the administrator account and remember it for the Client Setup step
+* Choose a username and password for the administrator account and remember it for the Client Setup step 6
 * The default Data Folder path should be correct: "`/var/www/html/nextcloud/data`"
 * Scroll down to continue setup
 * Fill out the MariaDB database information from earlier:
@@ -184,7 +187,7 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 
 [![.img/step04a.png](.img/step04a.png)](#nolink)
 
-* Setup will take 5-10 minutes
+* Setup processing will take 5-10 minutes
 * Once completed, you will be presented with a brief overview of Nextcloud (click right arrow to view or click the X to exit)
 
 [![.img/step04b.png](.img/step04b.png)](#nolink)
@@ -202,7 +205,7 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 ## 5. Nextcloud Client Installation
 
 * Download the latest version of Nextcloud client: https://nextcloud.com/install/#install-clients
-* Choose all the default settings during the installation
+* Continue with all the default settings during the installation
 * Once completed, choose to "Run Nextcloud" 
 
 [![.img/step05a.png](.img/step05a.png)](#nolink)
@@ -220,8 +223,9 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 [![.img/step06a.png](.img/step06a.png)](#nolink)
 
 * Nextcloud will now attempt to authenticate with your Pi by web browser
-* Your web browser should pop up with the login page you your Nextcloud server
-* Input the administrative username and password you setup earlier and login
+* Your web browser should pop up with the login page for your Nextcloud server
+* Input the administrative username and password you chose in step 4 and login
+* Choose to "Grant access"
 
 [![.img/step06b.png](.img/step06b.png)](#nolink)
 
@@ -256,13 +260,14 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 **For long term solutions, consider the following:**
 
 * **Better hardware**: Raspberry Pi Zero W will be sluggish
-* **Reliable storage**: Flash memory (e.g. micro SD card) is not as reliable as traditional hard drives
-* **Faster connection**: Zero W's WiFi bandwidth will drop with multiple users
+* **Reliable storage**: Flash memory (e.g. micro SD card) is not as reliable as traditional disk drives
+* **Faster connection**: Zero W's WiFi bandwidth is slow compared to wired ethernet
 * **Security**: Never expose a computer to the internet without taking precautions: https://www.upguard.com/blog/10-essential-steps-for-configuring-a-new-server
 
 **Pro-tips:**
 
 * **Backup and redundancy**: You can mirror your files on multiple devices by connecting to a common account
+* **Global access**: You can access your files anywhere in the world
 
 [Back to Top](#table-of-contents)
 
