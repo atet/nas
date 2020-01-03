@@ -27,7 +27,7 @@
 
 ### Supplemental
 
-* [Why Raspberry Pi?](#why-raspberry-pi)
+* [Need More Power?](#need-more-power)
 * [Other Resources](#other-resources)
 * [Troubleshooting](#troubleshooting)
 * [Acknowledgments](#acknowledgments)
@@ -81,10 +81,11 @@
 
 ## 2. Pi: Installation, Connection, Update
 
-* Please follow sections 2 and 3 in [Atet's 15 Minute Introduction to Raspberry Pi](https://github.com/atet/learn/blob/master/raspberrypi/README.md#atet--learn--raspberrypi):
+* Please follow sections 2 and 4 in [Atet's 15 Minute Introduction to Raspberry Pi](https://github.com/atet/learn/blob/master/raspberrypi/README.md#atet--learn--raspberrypi):
 
 2. [Installation](https://github.com/atet/learn/tree/master/raspberrypi#2-installation)
 3. [Connection](https://github.com/atet/learn/tree/master/raspberrypi#3-connection)
+4. [Updating](https://github.com/atet/learn/tree/master/raspberrypi#4-updating)
 
 * If you have any issues, please see [Troubleshooting for Raspberry Pi](https://github.com/atet/learn/tree/master/raspberrypi#troubleshooting)
 * Take note of your Raspberry Pi's current IP address for later
@@ -93,58 +94,71 @@
 
 --------------------------------------------------------------------------------------------------
 
-## 3. Update
-
-* Let's update where the operating system will look for updates:
-
-```
-$ sudo apt-get update
-```
-
-* **You must re-run the above line** if you see any issues like:
-
-```
-.
-.
-.
-1: Network is unreachable) [IP: 93.93.128.193 80]
-E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
-pi@raspberrypi:~ $ _
-```
-
-* You must make sure that "`sudo apt-get update`" ran successfully above
-* Now let's actually update any programs that are not at their latest version:
-   * Coffee break: This will take ~10 mins. and you don't need to babysit
-
-```
-$ sudo apt-get -y upgrade
-```
-
-[Back to Top](#table-of-contents)
-
---------------------------------------------------------------------------------------------------
-
 ## 3. Nextcloud Server Installation
 
-* First some dependencies:
+### 3.1. Installing dependencies
 
+#### 3.1.1. MariaDB database 
+
+* Download and install MariaDB
 
 ```
-sudo apt-get -y install mariadb-server-10.3
+$ sudo apt-get -y install mariadb-server-10.3 && \
+  sudo /usr/bin/mysql_secure_installation
 ```
 
+* Enter the following in the `mysql_secure_installation`:
+   * Enter current password for root, just press Enter
+   * Set root password: type "`y`"
+   * Enter "`nextcloud`" as the password for now (password is invisible for security)
+   * Answer the remainder of questions with "`y`"
+
+[![.img/step03a.png](.img/step03a.png)](#nolink)
+
+* Create a new database for Nextcloud
+
 ```
-$ sudo apt-get -y install apache2 \
-  libapr1-dev libaprutil1-dev libfcgi-dev \
-  libssl-dev zlib1g-dev libcurl4-openssl-dev \
-  
-  libapache2-mod-php7.3 \
+$ sudo mysql -u root -p
+> create database nextcloud;
+> create user ncuser;
+> set password for ncuser = password("password");
+> grant all PRIVILEGES on nextcloud.* to ncuser@localhost identified by 'raindrop';
+> exit;
+```
 
-  php7.3-apc
+#### 3.1.2. Apache web server
 
-  php7.3-fpm php7.3 php7.3-xml php7.3-cgi php7.3-cli php7.3-gd php7.3-curl php7.3-zip php7.3-mysql php7.3-mbstring
+```
+$ sudo apt-get -y install apache2
+```
 
-  sqlite php7.3-sqlite3 \
+#### 3.1.3. PHP tools
+
+```
+$ sudo apt-get -y install php php-gd \
+  php-curl php-zip php-xml php-mbstring \
+  libapache2-mod-php python-mysqldb php-mysql && \
+  sudo service apache2 restart
+```
+
+### 3.2. Nextcloud server
+
+* Download and extract the latest version of Nextcloud (v17.0.2 as of Jan. 1, 2020)
+
+```
+$ cd /var/www/html && \
+  sudo wget https://download.nextcloud.com/server/releases/nextcloud-17.0.2.tar.bz2 && \
+  sudo tar -xvjf nextcloud-17.0.2.tar.bz2
+```
+
+### 3.3. Permissions
+
+```
+$ sudo mkdir -p /var/www/html/nextcloud/data && \
+  sudo chown www-data:www-data /var/www/html/nextcloud/data && \
+  sudo chmod 750 /var/www/html/nextcloud/data && \
+  cd /var/www/html/nextcloud && \
+  sudo chown www-data:www-data config apps && \
   sudo service apache2 restart && \
   sudo service apache2 status
 ```
@@ -152,20 +166,7 @@ $ sudo apt-get -y install apache2 \
 * The "`apache2`" service must be "`active (running)`"
 * You can quit this screen by pressing "`q`"
 
-[![.img/step04a.png](.img/step04a.png)](#nolink)
-
-* Download and extract the latest version of Nextcloud (v17.0.2 as of Jan. 1, 2020)
-
-```
-$ sudo mkdir -p /var/www/html/nextcloud/data && \
-  sudo chown -R www-data:www-data /var/www/html/nextcloud/ && \
-  sudo chmod 750 /var/www/html/nextcloud/data && \
-  sudo touch /var/log/nextcloud.log && \
-  sudo chown www-data /var/log/nextcloud.log && \
-  cd /var/www/html && \
-  sudo wget https://download.nextcloud.com/server/releases/nextcloud-17.0.2.tar.bz2 && \
-  sudo tar -xvjf nextcloud-17.0.2.tar.bz2
-```
+[![.img/step03b.png](.img/step03b.png)](#nolink)
 
 [Back to Top](#table-of-contents)
 
@@ -174,6 +175,28 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 ## 4. Nextcloud Server Setup
 
 * In your web browser, navigate to "`http://<PI'S IP ADDRESS>/nextcloud`"
+* Choose a username and password for the administrator account
+* The Data Folder default should be correct: "`/var/www/html/nextcloud/data`"
+* Scroll down to continue setup
+* Fill out the databse information from earlier:
+   * Database User: "`ncuser`"
+   * Database password: "`password`"
+   * Database name: "`nextcloud`"
+   * localhost: Keep as "`localhost`"
+* Press "Finish setup"
+   * This will take a few minutes to setup
+
+[![.img/step04a.png](.img/step04a.png)](#nolink)
+
+* Once the setup is completed, you will be presented with a brief overview of Nextcloud (click right arrow to view or click the X to exit)
+
+[![.img/step04b.png](.img/step04b.png)](#nolink)
+
+* Briefly explore the web-based interface to manage Nextcloud
+* There are some example pictures, documents, and videos included with this install
+* Do not change any settings right now
+
+[![.img/step04c.png](.img/step04c.png)](#nolink)
 
 [Back to Top](#table-of-contents)
 
@@ -196,24 +219,23 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 **We touched on a bunch of different IT tasks here; you're easily on your way to becoming a self-sufficient ["techie"](https://www.merriam-webster.com/dictionary/techie), it just takes a lot of experimenting and completing projects like this**
 
 * Try this tutorial one more time to solidify these concepts
+* **If you would like to learn more about Bash and command line interface (CLI), please see [Atet's 15 Minute Introduction to Regular Expressions (in Bash)](https://github.com/atet/learn/blob/master/regex/README.md#atet--learn--regex)**
 * Now that you already have a Raspberry Pi, try some other fun projects: https://projects.raspberrypi.org/en/
 * Trying to go back to sleep at 3AM? Read the official Raspberry Pi starter guide: https://projects.raspberrypi.org/en/pathways/getting-started-with-raspberry-pi
-
-**If you would like to learn more about Bash and command line interface (CLI), please see [Atet's 15 Minute Introduction to Regular Expressions (in Bash)](https://github.com/atet/learn/blob/master/regex/README.md#atet--learn--regex)**
 
 [Back to Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------
 
-## Why Raspberry Pi?
+## Need More Power?
 
-* **_Trust me on this one_**: There's a huge difference in your learning experience when the brand you're working with has sold 10+ million computers vs. lesser-known alternatives that may be a _bit_ cheaper
-* With a larger userbase, there's reliable community and official support, bugs get fixed quicker, you can expect timely updates, etc.
-* The Raspberry Pi Zero is amazing for its price point, [but it's not going to play Crysis](https://en.wikipedia.org/wiki/Crysis_(video_game)#Legacy); this brand has other more powerful and more expensive computers if you need the horsepower
+* The Raspberry Pi Zero is amazing for its price point, [but it was pretty slow handling Nextcloud](https://www.reddit.com/r/NextCloud/comments/6shc9a/can_i_run_nextcloud_on_a_pi_zero/?utm_source=share&utm_medium=web2x); this brand has other more powerful and more expensive computers if you need the horsepower
+* For a NAS that's used by many people concurrently; you will need more RAM, disk storage, and CPU power (multi-core)
+* You might even consider having the NAS hard-wired to your network via faster gigabit ethernet instead of the Pi Zero W's slower WiFi
 
-> [![.img/wrpa.png](.img/wrpa.png)](#nolink)
+> [![.img/nmp.png](.img/nmp.png)](#nolink)
 >
-> Raspberry Pi 4 Model B
+> Raspberry Pi 4 Model B attached to four USB external hard disks
 
 [Back to Top](#table-of-contents)
 
