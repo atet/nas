@@ -66,6 +66,8 @@
 
 ## 1. Game Plan
 
+**This tutorial will setup your Raspberry Pi Zero W as a file server that will be accessible on your home network**
+
 [![.img/step01a.png](.img/step01a.png)](#nolink)
 
 * Regardless of your personal data maintenance regime (backup, sharing, etc.), this tutorial is meant to reinforce IT and system administration (SysAdmin) tasks
@@ -73,7 +75,7 @@
 
 [![.img/step01b.png](.img/step01b.png)](#nolink)
 
-* This tutorial will setup your Raspberry Pi Zero W as a file server that will be accessible to anyone on your home network
+* Upon completing this tutorial, you will make your Pi a central file server that can sync with multiple devices
 * This will not interfere with existing NAS on your network
 
 [Back to Top](#table-of-contents)
@@ -82,11 +84,13 @@
 
 ## 2. Pi: Installation, Connection, Update
 
+**You must set up your Raspberry Pi Zero W using the following instructions**
+
 * Please follow sections 2 and 4 in [Atet's 15 Minute Introduction to Raspberry Pi](https://github.com/atet/learn/blob/master/raspberrypi/README.md#atet--learn--raspberrypi):
 
-2. [Installation](https://github.com/atet/learn/tree/master/raspberrypi#2-installation)
-3. [Connection](https://github.com/atet/learn/tree/master/raspberrypi#3-connection)
-4. [Updating](https://github.com/atet/learn/tree/master/raspberrypi#4-updating)
+   2. [Installation](https://github.com/atet/learn/tree/master/raspberrypi#2-installation)
+   3. [Connection](https://github.com/atet/learn/tree/master/raspberrypi#3-connection)
+   4. [Updating](https://github.com/atet/learn/tree/master/raspberrypi#4-updating)
 
 * If you have any issues, please see [Troubleshooting for Raspberry Pi](https://github.com/atet/learn/tree/master/raspberrypi#troubleshooting)
 * Take note of your Raspberry Pi's current IP address for later
@@ -101,15 +105,16 @@
 
 #### 3.1.1. MariaDB database 
 
+* **Log into your Raspberry Pi**
 * Download and install MariaDB
 
 ```
-$ sudo apt-get -y install mariadb-server-10.3 && \
-  sudo /usr/bin/mysql_secure_installation
+pi@raspberrypi:~ $ sudo apt-get -y install mariadb-server-10.3 && \
+                   sudo /usr/bin/mysql_secure_installation
 ```
 
 * Enter the following in the `mysql_secure_installation`:
-   * Enter current password for root, just press Enter
+   * There is no current password for root, just press Enter
    * Set root password: type "`y`"
    * Enter "`nextcloud`" as the password for now (password is invisible for security)
    * Answer the remainder of questions with "`y`"
@@ -122,12 +127,17 @@ $ sudo apt-get -y install mariadb-server-10.3 && \
 
 ```
 $ sudo mysql -u root -p
+
+### ENTER PASSWORD YOU MADE IN PREVIOUS STEP ###
+
 > create database nextcloud;
 > create user ncuser;
 > set password for ncuser = password("password");
 > grant all PRIVILEGES on nextcloud.* to ncuser@localhost identified by 'password';
 > exit;
 ```
+
+[![.img/step03a2.png](.img/step03a2.png)](#nolink)
 
 #### 3.1.2. Apache web server and PHP tools
 
@@ -162,7 +172,7 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 ```
 
 * The "`apache2`" service must be "`active (running)`"
-* You can quit this screen by pressing "`q`"
+* Exit from this screen by pressing "`q`"
 
 [![.img/step03b.png](.img/step03b.png)](#nolink)
 
