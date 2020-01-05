@@ -8,7 +8,7 @@
 
 * This introduction to Network Attached Storage (NAS) only covers what's absolutely necessary to get you up and running
 * You are here because **you want to setup a simple but powerful shared NAS**
-* We will be using the [free and open source Nextcloud service](https://en.wikipedia.org/wiki/Nextcloud) on the $10 Raspberry Pi Zero W
+* We will be using the free and open source Nextcloud service on the $10 Raspberry Pi Zero W
 
 --------------------------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@
 
 ### Software
 
-* Windows: This tutorial was developed on Microsoft Windows 10 with Windows Subsystem for Linux (WSL)
+* Windows: This tutorial was developed on Microsoft Windows 10 with Windows Subsystem for Linux (WSL) and [Nextcloud v17.0.2](https://en.wikipedia.org/wiki/Nextcloud)
 * MacOS: [Your Terminal program is Bash](https://en.wikipedia.org/wiki/Terminal_(macOS))
 * Linux: I recommend Ubuntu 18.04 LTS
 
@@ -149,7 +149,8 @@ $ sudo apt-get -y install apache2 \
 
 ### 3.2. Nextcloud server
 
-* Download and extract the latest version of Nextcloud (v17.0.2 as of Jan. 1, 2020)
+* Download and extract the latest version of Nextcloud: https://nextcloud.com/changelog/
+* Version used in this tutorial is 17.0.2 (as of Jan. 4, 2020)
 
 ```
 $ cd /var/www/html && \
