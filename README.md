@@ -1,4 +1,4 @@
-# [atet](https://github.com/atet) / [learn](https://github.com/atet/learn) / [**_nas_**](https://github.com/atet/learn/tree/master/nas)
+# [atet](https://github.com/atet) / [learn](https://github.com/atet/learn/blob/master/README.md#atet--learn) / [**_nas_**](https://github.com/atet/learn/blob/master/nas/README.md#atet--learn--nas)
 
 [![.img/logo_nextcloud.png](.img/logo_nextcloud.png)](#nolink)
 
