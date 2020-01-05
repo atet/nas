@@ -68,15 +68,13 @@
 
 **This tutorial will setup your Raspberry Pi Zero W as a file server that will be accessible on your home network**
 
+* Regardless of your personal data maintenance regime (backup, sharing, etc.), this tutorial is meant to reinforce IT and system administration (SysAdmin) tasks
+
 [![.img/step01a.png](.img/step01a.png)](#nolink)
 
-* Regardless of your personal data maintenance regime (backup, sharing, etc.), this tutorial is meant to reinforce IT and system administration (SysAdmin) tasks
-* Hopefully, setting up the network attached storage (NAS) service in this tutorial is useful enough for you to incorporate into your personal routine
+* Upon completing this tutorial, you will make your Pi a central file server that can sync with multiple devices
 
 [![.img/step01b.png](.img/step01b.png)](#nolink)
-
-* Upon completing this tutorial, you will make your Pi a central file server that can sync with multiple devices
-* This will not interfere with existing NAS on your network
 
 [Back to Top](#table-of-contents)
 
@@ -161,6 +159,9 @@ $ cd /var/www/html && \
 
 ### 3.3. Permissions
 
+* The "`apache2`" service must be "`active (running)`" after this set of commands
+* **Exit from the status screen by pressing "`q`"**
+
 ```
 $ sudo mkdir -p /var/www/html/nextcloud/data && \
   sudo chown www-data:www-data /var/www/html/nextcloud/data && \
@@ -170,9 +171,6 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
   sudo service apache2 restart && \
   sudo service apache2 status
 ```
-
-* The "`apache2`" service must be "`active (running)`"
-* Exit from this screen by pressing "`q`"
 
 [![.img/step03b.png](.img/step03b.png)](#nolink)
 
@@ -193,17 +191,16 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
    * Database password: "`password`"
    * Database name: "`nextcloud`"
    * localhost: Keep as "`localhost`"
-* Press "Finish setup"
+* Press "Finish setup" (this will take 5-10 minutes)
 
 [![.img/step04a.png](.img/step04a.png)](#nolink)
 
-* Setup processing will take 5-10 minutes
-* Once completed, you will be presented with a brief overview of Nextcloud (click right arrow to view or click the X to exit)
+* Once completed, you will be presented with a brief overview of Nextcloud (browse the overview or click X to exit)
 
 [![.img/step04b.png](.img/step04b.png)](#nolink)
 
-* Briefly explore the web-based interface to manage Nextcloud
-* Notice that you can upload and manage files through the web-based graphical user interface (GUI)
+* Briefly explore the Nextcloud's web-based interface
+* Notice that you can upload and manage files through this graphical user interface (GUI)
 * **Log out without changing any settings at this time**
 
 [![.img/step04c.png](.img/step04c.png)](#nolink)
@@ -232,22 +229,20 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 
 [![.img/step06a.png](.img/step06a.png)](#nolink)
 
-* Nextcloud will now attempt to authenticate with your Pi by web browser
+* Nextcloud will now attempt to authenticate with your Pi
 * Your web browser should pop up with the login page for your Nextcloud server
-* Input the administrative username and password you chose in step 4 and login
-* Choose to "Grant access"
+* Login with your username and password you chose in step 4
+* Choose "Grant access"
 
 [![.img/step06b.png](.img/step06b.png)](#nolink)
 
-* Once your client has successfully authenticated, a final setup window will appear with two important options (just leave default for now):
-   * Sync everything or selective sync
-   * Location of local synced directory
-* Nextcloud server will now sync with your local directory
+* Once your client has successfully authenticated, a final setup window will appear (leave as default for now)
+* Nextcloud server will now sync to your local directory
 
 [![.img/step06c.png](.img/step06c.png)](#nolink)
 
 * Once syncing is complete, you can use your Nextcloud directory in File Explorer just like any other normal directory (move files into/out of, delete files, etc.)
-* This directory will be seamlessly synced with your Nextcloud server
+* **This directory is seamlessly synced with your Nextcloud server**
 
 [![.img/step06d.png](.img/step06d.png)](#nolink)
 
@@ -278,6 +273,7 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 
 * **Backup and redundancy**: You can mirror your files on multiple devices by connecting to a common account
 * **Global access**: You can access your files anywhere in the world
+* **Buy better hardware**: Do not use the Pi Zero as your actual Nextcloud NAS; it will be painfully slow and disk drives offer more storage and reliability than micro SD
 
 [Back to Top](#table-of-contents)
 
