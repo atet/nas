@@ -4,6 +4,8 @@
 
 # Introduction to Network Attached Storage
 
+**This tutorial is part of my series on System Administration:<br>I highly recommend finishing my [15 Minute Introduction to Raspberry Pi](https://github.com/atet/learn/blob/master/raspberrypi/README.md#atet--learn--raspberrypi) to put this tutorial in better context**
+
 **Estimated time to completion: 15 minutes**<br>(excluding waiting times for downloads and updates)
 
 * This introduction to Network Attached Storage (NAS) only covers what's absolutely necessary to get you up and running
@@ -36,8 +38,6 @@
 --------------------------------------------------------------------------------------------------
 
 ## 0. Requirements
-
-**This is part of a two-tutorial series on System Administration: I recommend to first finish [Atet's 15 Minute Tutorial on Raspberry Pi](https://github.com/atet/learn/blob/master/raspberrypi/README.md#atet--learn--raspberrypi) to put this content in better context**
 
 ### Software
 
@@ -104,7 +104,7 @@
 #### 3.1.1. MariaDB database 
 
 * **Log into your Raspberry Pi**
-* Download and install MariaDB
+* Download and install MariaDB; a high performance database that Nextcloud requires
 
 ```
 pi@raspberrypi:~ $ sudo apt-get -y install mariadb-server-10.3 && \
@@ -285,7 +285,7 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 **We touched on a bunch of different IT tasks here; you're easily on your way to becoming a self-sufficient ["techie"](https://www.merriam-webster.com/dictionary/techie), it just takes a lot of experimenting and completing projects like this**
 
 * Try this tutorial one more time to solidify these concepts
-* **If you would like to learn more about Bash and command line interface (CLI), please see [Atet's 15 Minute Introduction to Regular Expressions (in Bash)](https://github.com/atet/learn/blob/master/regex/README.md#atet--learn--regex)**
+* **I highly recommend continuing with another mini project: [Atet's 15 Minute Introduction to Virtualization](https://github.com/atet/learn/blob/master/virtual/README.md#atet--learn--virtual)**
 * Now that you already have a Raspberry Pi, try some other fun projects: https://projects.raspberrypi.org/en/
 * Trying to go back to sleep at 3AM? Read the official Raspberry Pi starter guide: https://projects.raspberrypi.org/en/pathways/getting-started-with-raspberry-pi
 
