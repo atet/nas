@@ -104,11 +104,11 @@
 #### 3.1.1. MariaDB database 
 
 * **Log into your Raspberry Pi**
-* Download and install MariaDB; a high performance database that Nextcloud requires
+* Download and install MariaDB; a high performance database that Nextcloud requires to store data
 
 ```
-pi@raspberrypi:~ $ sudo apt-get -y install mariadb-server-10.3 && \
-                   sudo /usr/bin/mysql_secure_installation
+$ sudo apt install -y mariadb-server-10.3 && \
+  sudo /usr/bin/mysql_secure_installation
 ```
 
 * Enter the following in the `mysql_secure_installation`:
@@ -139,8 +139,10 @@ $ sudo mysql -u root -p
 
 #### 3.1.2. Apache web server and PHP tools
 
+* Download and install Apache; a high performance web server that Nextcloud requires for a web interface
+
 ```
-$ sudo apt-get -y install apache2 \
+$ sudo apt install -y apache2 \
   php php-gd php-curl php-zip php-xml \
   php-mbstring libapache2-mod-php \
   python-mysqldb php-mysql && \
@@ -192,7 +194,7 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
    * Database password: "`password`"
    * Database name: "`nextcloud`"
    * localhost: Keep as "`localhost`"
-* Press "Finish setup" (this will take 5-10 minutes)
+* Press "Finish setup" (this will take ~5 minutes)
 
 [![.img/step04a.png](.img/step04a.png)](#nolink)
 
@@ -265,16 +267,15 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 
 **For long term solutions, consider the following:**
 
-* **Better hardware**: Raspberry Pi Zero W will be sluggish
-* **Reliable storage**: Flash memory (e.g. micro SD card) is not as reliable as traditional disk drives
+* **Better hardware**: You've experienced the Pi Zero being a bit sluggish
+* **Reliable storage**: Micro SD card is not as reliable as traditional disk drives
 * **Faster connection**: Zero W's WiFi bandwidth is slow compared to wired ethernet
 * **Security**: Never expose a computer to the internet without taking precautions: https://www.upguard.com/blog/10-essential-steps-for-configuring-a-new-server
 
 **Pro-tips:**
 
-* **Backup and redundancy**: You can mirror your files on multiple devices by connecting to a common account
-* **Global access**: You can access your files anywhere in the world
-* **Buy better hardware**: Do not use the Pi Zero as your actual Nextcloud NAS; it will be painfully slow and disk drives offer more storage and reliability than micro SD
+* **Backup and redundancy**: You can mirror your files on multiple devices just by connecting to a common account
+* **Buy better hardware**: Don't use the Pi Zero as an actual Nextcloud NAS; it will be painfully slow and disk drives offer more storage and reliability than micro SD
 
 [Back to Top](#table-of-contents)
 
@@ -322,7 +323,6 @@ Official Raspberry Pi Project Ideas | https://projects.raspberrypi.org/en/
 
 Issue | Solution
 --- | ---
-Is Nextcloud supported on ARMv6 (e.g. Raspberry Pi Zero W)? | Yes, https://help.nextcloud.com/t/raspberry-pi-zero-w-unsupported/44910/6
 Nextcloud web GUI seems to be hanging/frozen | Just wait, the Raspberry Pi Zero is not a supercomputer
 Nextcloud client cannot authenticate with the Pi server | Make sure you are using "`http://`" in the address and NOT "`https://`", also you need to add the "`/nextcloud/`" in the address
 
