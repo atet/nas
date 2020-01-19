@@ -186,7 +186,8 @@ $ sudo mkdir -p /var/www/html/nextcloud/data && \
 ## 4. Nextcloud Server Setup
 
 * In your web browser, navigate to "`http://<PI'S IP ADDRESS>/nextcloud`"
-* Choose a username and password for the administrator account and remember it for the Client Setup step 6
+* Choose a username and password for the administrator account **and remember it** for the Client Setup step 6
+   * You can choose something temporary like username `admin` and password `admin`
 * The default Data Folder path should be correct: "`/var/www/html/nextcloud/data`"
 * Scroll down to continue setup
 * Fill out the MariaDB database information from earlier:
