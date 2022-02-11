@@ -41,13 +41,23 @@
 
 ### Software
 
-* Windows: This tutorial was developed on Microsoft Windows 10 with Windows Subsystem for Linux (WSL) and [Nextcloud v17.0.2](https://en.wikipedia.org/wiki/Nextcloud)
-* MacOS: [Your Terminal program is Bash](https://en.wikipedia.org/wiki/Terminal_(macOS))
-* Linux: I recommend Ubuntu 18.04 LTS
+We will use a Linux a command line interface (CLI) available on all major operating systems
 
-### Computer Hardware
+#### Windows 10
 
-* This tutorial uses the $10 Raspberry Pi Zero W ("wireless")
+* Windows Subsystem for Linux (WSL) is a fully supported Microsoft product for Windows 10, learn how to install it here: https://github.com/atet/wsl
+
+#### MacOS
+
+* You do not need to install anything, [your Terminal program is Bash](https://en.wikipedia.org/wiki/Terminal_(macOS))
+
+#### Linux
+
+* I recommend using Ubuntu 20.04 LTS
+
+### Hardware
+
+* This tutorial uses the $10 Raspberry Pi Zero W ("wireless") computer
 * You will also need a 5V micro USB cell phone charger and ≥8 GB microSD card
 
 ### WiFi Network
